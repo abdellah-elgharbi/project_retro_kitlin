@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option java_package = "ma.ensaj.hotel.stubs";
+option java_outer_classname = "ReservationProto";
+
+message Client {
+  int64 id = 1;
+  string nom = 2;
+  string prenom = 3;
+  string email = 4;
+  string telephone = 5;
+}
+
+message Chambre {
+  int64 id = 1;
+  string type = 2;
+  double prix = 3;
+  bool disponible = 4;
+}
+
+message Reservation {
+  int64 id = 1;
+  Client client = 2;
+  Chambre chambre = 3;
+  string dateDebut = 4;
+  string dateFin = 5;
+  string preferences = 6;
+}
+
+message AddClientRequest {
+  Client client = 1;
+}
+
+message AddClientResponse {
+  string message = 1;
+}
+
+message AddChambreRequest {
+  Chambre chambre = 1;
+}
+
+message AddChambreResponse {
+  string message = 1;
+}
+message CreateReservationRequest {
+  Reservation reservation = 1;
+}
+
+message CreateReservationResponse {
+  string message = 1;
+}
+
+service ReservationService {
+  rpc CreateReservation (CreateReservationRequest) returns (CreateReservationResponse);
+  rpc AddClient(AddClientRequest) returns (AddClientResponse);
+  rpc AddChambre(AddChambreRequest) returns (AddChambreResponse);
+}
